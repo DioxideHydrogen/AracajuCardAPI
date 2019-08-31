@@ -1,13 +1,11 @@
 import requests
 import bs4
-import os
-from pesquisas import Pesquise
 
 urlLogin = "https://sistemas.aracajucard.com.br/portaldousuario/Acesso.aspx"
 urlSaldo = "http://sistemas.aracajucard.com.br/portaldousuario/ExtratoUtilizacao.aspx"
 
-username = "08042911521"
-password = "70sergipe"
+username = "" # Seu usuário
+password = "" # Sua senha
 
 s = requests.Session()
 s.auth = (username,password)
@@ -20,7 +18,7 @@ split1 = preparaHeaders.split(";")
 cookieASP = split1[0].split("=")
 
 cookie = {
-    'ASP.NET_SessionId': 'rlrrn4pv33sp3z5bybxvbzyw',
+    'ASP.NET_SessionId': '', # Token capturado no navegador
 }
 
 saldoGet = s.get(urlSaldo, cookies=cookie)
@@ -36,5 +34,4 @@ saldo = font.get_text()[13:].replace(',','reais e')
 
 frase = 'Saldo atual da carteira de transporte e de {} centavos'.format(saldo)
 
-a = Pesquise(frase)
-a.fala(frase)
+print frase
